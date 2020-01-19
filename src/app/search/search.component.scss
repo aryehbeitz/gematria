@@ -1,0 +1,12 @@
+.search-holder {
+  margin: 10px;
+  padding: 10px;
+  display: inline-block;
+  .input-holder {
+    direction: rtl;
+  }
+  .sum-holder {
+    min-height: 19px;
+    margin-top: 14px;
+  }
+}
