@@ -16,14 +16,17 @@ interface GematriaResult {
 })
 export class SearchComponent {
   public matchingWords: string;
+  public sum: number;
   constructor(private httpClient: HttpClient) {
   }
 
   calculateGematria(event) {
     const word = event.target.value;
     const baseUrl = 'https://gematria.aryehbeitz.net/gematrium/lookup_by_word';
-    return this.httpClient.get<GematriaResult>(`${baseUrl}?word=${word}`).subscribe((result: GematriaResult) => {
-      this.matchingWords = result.matching_words.join(', ');
+    return this.httpClient.get<Array<GematriaResult>>(`${baseUrl}?word=${word}`).subscribe((result: Array<GematriaResult>) => {
+      const match = result[0];
+      this.matchingWords = match.matching_words.join(', ');
+      this.sum = match.gematria_value;
     });
   }
 }
