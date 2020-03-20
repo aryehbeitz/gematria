@@ -31,7 +31,10 @@ export class SearchComponent {
     } else {
       this.currentWord = event;
     }
-    const url = `${this.baseUrl}/lookup_by_word`;
+    let url = `${this.baseUrl}/lookup_by_word`;
+    if (parseInt(this.currentWord, 10) === Number(this.currentWord)) {
+      url = `${this.baseUrl}/lookup_by_gematria`;
+    }
     return this.httpClient.get<Array<GematriaResult>>(`${url}?query=${this.currentWord}`)
     .subscribe((result: Array<GematriaResult>) => {
       this.assignResult(result);
