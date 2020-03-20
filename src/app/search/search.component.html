@@ -1,5 +1,16 @@
 <div class="search-holder">
-  <input class="input-holder" (keyup)="calculateGematria($event)">
+  <input ([ngModel])="currentWord" class="input-holder" (keyup)="calculateGematria($event)">
   <div class="sum-holder">{{sum}}</div>
-  <div class="sum-holder">{{matchingWords}}</div>
+  <div class="sum-holder">
+    <div (dblclick)="removeWord(word)" class="matching-word" *ngFor="let word of matchingWords">
+      {{ word }}
+    </div>
+  </div>
+
+  <button *ngIf="currentWord" (click)="addToFavorites()" class="add-to-favorites-button">הוסף למעודפים</button>
+  <div class="favorites">
+    <div (click)="calculateGematria(favorite)" *ngFor="let favorite of favorites" class="favorite">
+      {{ favorite }}
+    </div>
+  </div>
 </div>
